@@ -9,6 +9,7 @@ import store from "./store/index"
 
 Vue.config.productionTip = false
 Vue.use(ElementUi)
+Vue.prototype.$bus=new Vue();
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

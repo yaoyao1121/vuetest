@@ -100,7 +100,11 @@
     <transition name='fade'>
       <p v-if="show">hello</p>
     </transition>
-
+    <router-link to="/memu">导航</router-link>
+    <Brother1 :fatherData="fatherData" @targetUsername='getUsername'></Brother1>
+    <p>用户名：{{username}}</p>
+    <br>
+    <Brother2></Brother2>
   </div> 
 </template>
 <script>
@@ -109,21 +113,28 @@
 // console.log(actions('schedule'),'common')
 // console.log(window.serverUrl,'-----config.js-hello--')
 import {mapGetters, mapMutations, mapActions} from 'vuex'
-
+import Brother1 from './brother1'
+import Brother2 from './brother2'
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      show:true
+      show:true,
+      fatherData:'父组件向子组件发送数据',
+      username:''
     }
   },
+  components:{Brother1,Brother2},
   methods:{
     ...mapActions('schedule', ['postData']),
     onSubmit(){
       // alert('77777')
       let options = {name:'zx',age:39,sex:'1'}
       this.postData({typeName: 'list', data: options})
+    },
+    getUsername(msg){
+      this.username=msg
     }
   }
 }
